@@ -3,28 +3,35 @@ FROM ubuntu:18.04
 ARG UBUNTU_MIRROR
 
 # Install 'add-apt-repository'
-RUN apt-get update && apt-get -qqy install apt-utils software-properties-common
+RUN apt-get update && \
+    apt-get -qqy install apt-utils software-properties-common
 
 # Build tool
-RUN apt-get update && apt-get -qqy install build-essential cmake scons git sudo lcov g++-arm-linux-gnueabihf g++-aarch64-linux-gnu
+RUN apt-get update && \
+    apt-get -qqy install build-essential cmake scons git sudo lcov g++-arm-linux-gnueabihf g++-aarch64-linux-gnu
 
 # Install extra dependencies (Caffe, nnkit)
-RUN apt-get update && apt-get -qqy install libboost-all-dev libgflags-dev libgoogle-glog-dev libatlas-base-dev libhdf5-dev
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qqy install libboost-all-dev libgflags-dev libgoogle-glog-dev libatlas-base-dev libhdf5-dev
 
 # Install protocol buffer
-RUN apt-get update && apt-get -qqy install libprotobuf-dev protobuf-compiler
+RUN apt-get update && \
+    apt-get -qqy install libprotobuf-dev protobuf-compiler
 
 # Additonal tools
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install doxygen graphviz wget unzip clang-format-8 python3 python3-pip python3-venv hdf5-tools pylint
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qqy install wget tmux unzip clang-format-8 python3 python3-pip python3-venv hdf5-tools pylint
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install yapf==0.22.0 numpy
 
-RUN apt-get update && apt-get -qqy install python3.8 python3.8-venv python3.8-dev
+RUN apt-get update && \
+    apt-get -qqy install python3.8 python3.8-venv python3.8-dev
 RUN python3.8 -m pip install --upgrade pip
 RUN python3.8 -m pip install yapf==0.22.0 numpy
 
 # Install google test (source)
-RUN apt-get update && apt-get -qqy install libgtest-dev
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qqy install libgtest-dev
 
 # Build and install google test static libraries
 WORKDIR /root/gtest
