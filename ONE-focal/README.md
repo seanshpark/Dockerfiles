@@ -1,4 +1,4 @@
-## ONE-bionic
+## ONE-focal
 
 Ubuntu 20.04 based to build Samsung/ONE
 
